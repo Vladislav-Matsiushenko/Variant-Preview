@@ -1,0 +1,26 @@
+{
+  "name": "magedia/magedia-variant-preview",
+  "description": "magedia/magedia-variant-preview",
+  "type": "shopware-platform-plugin",
+  "version": "1.0.0",
+  "license": "MIT",
+  "require": {
+    "shopware/core": "~6.6.0"
+  },
+  "extra": {
+    "shopware-plugin-class": "Magedia\\VariantPreview\\MagediaVariantPreview",
+    "label": {
+      "en-GB": "Variant preview in product lising"
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "Magedia\\VariantPreview\\": "src/"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "symfony/runtime": true
+    }
+  }
+}

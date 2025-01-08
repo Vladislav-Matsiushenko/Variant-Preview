@@ -1,0 +1,15 @@
+{% sw_extends '@Storefront/storefront/component/product/card/box-standard.html.twig' %}
+
+{% block component_product_box_image %}
+    {{ parent() }}
+
+    {% if product.extensions.variantThumbnails is defined %}
+        <div class="product-variants">
+            {% for variant in product.extensions.variantThumbnails %}
+                <a href="{{ variant.url }}" class="variant-link" title="{{ variant.name }}" data-image="{{ variant.image }}">
+                    <img src="{{ variant.image }}" alt="Variant Thumbnail" class="variant-thumbnail"/>
+                </a>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}
