@@ -2,6 +2,7 @@
 
 namespace Magedia\VariantPreview\Subscriber;
 
+use Shopware\Core\Content\Product\Events\ProductSearchResultEvent;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityRepository;
 use Shopware\Core\Content\Product\Events\ProductListingResultEvent;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
@@ -10,6 +11,7 @@ use Shopware\Core\Framework\Struct\ArrayStruct;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Contracts\EventDispatcher\Event;
 
 class ProductListingSubscriber implements EventSubscriberInterface
 {
@@ -23,16 +25,28 @@ class ProductListingSubscriber implements EventSubscriberInterface
     {
         return [
             ProductListingResultEvent::class => 'onProductListingResult',
+            ProductSearchResultEvent::class => 'onProductSearchResult'
         ];
     }
 
-    public function onProductListingResult(ProductListingResultEvent $event): void
+    public function onProductListingResult(Event $event): void
+    {
+        $this->addVariantThumbnails($event);
+    }
+
+    public function onProductSearchResult(Event $event): void
+    {
+        $this->addVariantThumbnails($event);
+    }
+
+    private function addVariantThumbnails(Event $event): void
     {
         $result = $event->getResult();
         $context = $event->getContext();
 
         foreach ($result->getEntities() as $product) {
-            $parentId = $product->getParentId();
+            $parentId = $product->getChildCount() > 1 ? $product->getId() : $product->getParentId();
+
             if ($parentId) {
                 $criteria = new Criteria();
                 $criteria

@@ -4,12 +4,17 @@
     {{ parent() }}
 
     {% if product.extensions.variantThumbnails is defined %}
-        <div class="product-variants">
-            {% for variant in product.extensions.variantThumbnails %}
-                <a href="{{ variant.url }}" class="variant-link" title="{{ variant.name }}" data-image="{{ variant.image }}">
-                    <img src="{{ variant.image }}" alt="Variant Thumbnail" class="variant-thumbnail"/>
-                </a>
-            {% endfor %}
+        <div class="product-variants-container" data-magedia-variant-preview="true">
+            <div class="product-variants">
+                {% for variant in product.extensions.variantThumbnails %}
+                    <a href="{{ variant.url }}" class="variant-link" title="{{ variant.name }}" data-image="{{ variant.image }}">
+                        <img src="{{ variant.image }}" alt="Variant Thumbnail" class="variant-thumbnail"/>
+                    </a>
+                {% endfor %}
+            </div>
+
+            <button class="variant-arrow left"><b><</b></button>
+            <button class="variant-arrow right"><b>></b></button>
         </div>
     {% endif %}
 {% endblock %}
