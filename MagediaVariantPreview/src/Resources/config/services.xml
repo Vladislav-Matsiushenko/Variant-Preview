@@ -6,6 +6,7 @@
 
     <services>
         <service id="Magedia\VariantPreview\Subscriber\ProductListingSubscriber">
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
             <argument type="service" id="product.repository"/>
             <argument type="service" id="router" />
             <tag name="kernel.event_subscriber" />
