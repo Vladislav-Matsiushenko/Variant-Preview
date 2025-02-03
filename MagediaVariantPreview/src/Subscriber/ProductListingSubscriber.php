@@ -43,7 +43,7 @@ class ProductListingSubscriber implements EventSubscriberInterface
 
     private function addVariantThumbnails(Event $event): void
     {
-        $propertyGroupId = $this->systemConfigService->get('MagediaVariantPreview.config.propertyGroupId');
+        $propertyGroupId = $this->systemConfigService->get('MagediaVariantPreview.config.propertyGroupIds');
         if (!$propertyGroupId) {
             return;
         }
@@ -62,31 +62,36 @@ class ProductListingSubscriber implements EventSubscriberInterface
 
                 $variants = [];
                 $optionNames = [];
+                $images = [];
                 foreach ($this->productRepository->search($criteria, $context)->getEntities() as $child) {
                     foreach ($child->getOptions() as $option) {
-                        if ($option->getGroup()?->getId() === $propertyGroupId) {
+                        if (in_array($option->getGroup()?->getId(), $propertyGroupId)) {
 
                             $optionName = $option->getTranslation('name');
                             if (!in_array($optionName, $optionNames)) {
-                                $optionNames[] = $optionName;
+                                $image = $child->getMedia()?->first()?->getMedia()?->getUrl();
+                                if ($image && !in_array($image, $images)) {
+                                    $optionNames[] = $optionName;
+                                    $images[] = $image;
 
-                                $variants[] = [
-                                    'url' => $this->router->generate(
-                                        'frontend.detail.page',
-                                        ['productId' => $child->getId()],
-                                        UrlGeneratorInterface::ABSOLUTE_URL
-                                    ),
-                                    'image' => $child->getMedia()?->first()?->getMedia()?->getUrl() ?? '',
-                                    'name' => $child->getTranslation('name') ?? '',
-                                ];
+                                    $variants[] = [
+                                        'url' => $this->router->generate(
+                                            'frontend.detail.page',
+                                            ['productId' => $child->getId()],
+                                            UrlGeneratorInterface::ABSOLUTE_URL
+                                        ),
+                                        'image' => $image,
+                                        'name' => $child->getTranslation('name') ?? '',
+                                    ];
 
-                                break;
+                                    break;
+                                }
                             }
                         }
                     }
                 }
 
-                if (count($variants)) {
+                if (count($variants) > 1) {
                     $product->addExtension('variantThumbnails', new ArrayStruct($variants));
                 }
             }

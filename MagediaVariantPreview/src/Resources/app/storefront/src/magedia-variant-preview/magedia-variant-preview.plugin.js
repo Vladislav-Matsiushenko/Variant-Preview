@@ -16,6 +16,7 @@ export default class MagediaVariantPreview extends PluginBaseClass {
 
         if (!mainImage.hasAttribute('data-original')) {
             mainImage.setAttribute('data-original', mainImage.src);
+            mainImage.setAttribute('title', mainImage.getAttribute('alt'));
         }
 
         thumbnails.forEach(thumbnail => {

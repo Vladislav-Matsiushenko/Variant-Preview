@@ -6,8 +6,8 @@
     <card>
         <title>Variants for the selected property group</title>
 
-        <component name="sw-entity-single-select">
-            <name>propertyGroupId</name>
+        <component name="sw-entity-multi-id-select">
+            <name>propertyGroupIds</name>
             <entity>property_group</entity>
             <label>Select property group</label>
         </component>
