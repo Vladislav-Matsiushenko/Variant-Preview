@@ -7,7 +7,7 @@
         <div class="product-variants-container" data-magedia-variant-preview="true">
             <div class="product-variants">
                 {% for variant in product.extensions.variantThumbnails %}
-                    <a href="{{ variant.url }}" class="variant-link" title="{{ variant.name }}" data-image="{{ variant.image }}">
+                    <a href="{{ variant.url }}" class="variant-link" title="{{ variant.title }}" data-image="{{ variant.image }}">
                         <img src="{{ variant.image }}" alt="Variant Thumbnail" class="variant-thumbnail"/>
                     </a>
                 {% endfor %}
@@ -17,4 +17,12 @@
             <button class="variant-arrow right"><b>></b></button>
         </div>
     {% endif %}
+
+    <script>
+        document.querySelectorAll('.card-body .product-image-wrapper .product-image.is-standard').forEach(image => {
+            if (image.hasAttribute('alt')) {
+                image.setAttribute('title', image.getAttribute('alt'));
+            }
+        });
+    </script>
 {% endblock %}

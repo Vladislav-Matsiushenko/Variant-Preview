@@ -62,17 +62,19 @@ class ProductListingSubscriber implements EventSubscriberInterface
 
                 $variants = [];
                 $optionNames = [];
-                $images = [];
+                $imageUrls = [];
                 foreach ($this->productRepository->search($criteria, $context)->getEntities() as $child) {
                     foreach ($child->getOptions() as $option) {
                         if (in_array($option->getGroup()?->getId(), $propertyGroupId)) {
 
                             $optionName = $option->getTranslation('name');
                             if (!in_array($optionName, $optionNames)) {
-                                $image = $child->getMedia()?->first()?->getMedia()?->getUrl();
-                                if ($image && !in_array($image, $images)) {
+
+                                $image = $child->getMedia()?->first()?->getMedia();
+                                $imageUrl = $image?->getUrl();
+                                if ($imageUrl && !in_array($imageUrl, $imageUrls)) {
                                     $optionNames[] = $optionName;
-                                    $images[] = $image;
+                                    $imageUrls[] = $imageUrl;
 
                                     $variants[] = [
                                         'url' => $this->router->generate(
@@ -80,8 +82,8 @@ class ProductListingSubscriber implements EventSubscriberInterface
                                             ['productId' => $child->getId()],
                                             UrlGeneratorInterface::ABSOLUTE_URL
                                         ),
-                                        'image' => $image,
-                                        'name' => $child->getTranslation('name') ?? '',
+                                        'image' => $imageUrl,
+                                        'title' => $image->getAlt() ?? $child->getTranslation('name'),
                                     ];
 
                                     break;

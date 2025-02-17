@@ -1,0 +1,13 @@
+{% sw_extends '@Storefront/storefront/element/cms-element-image-gallery.html.twig' %}
+
+{% block element_image_gallery %}
+    {{ parent() }}
+
+    <script>
+        document.querySelectorAll('.gallery-slider-thumbnails-item-inner img, .gallery-slider-item img, .gallery-slider-single-image img').forEach(image => {
+            if (image.hasAttribute('alt')) {
+                image.setAttribute('title', image.getAttribute('alt'));
+            }
+        });
+    </script>
+{% endblock %}
