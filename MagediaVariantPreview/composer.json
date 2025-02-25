@@ -10,7 +10,7 @@
   "extra": {
     "shopware-plugin-class": "Magedia\\VariantPreview\\MagediaVariantPreview",
     "label": {
-      "en-GB": "Variant preview in product lising"
+      "en-GB": "Variant preview in product listing"
     }
   },
   "autoload": {
