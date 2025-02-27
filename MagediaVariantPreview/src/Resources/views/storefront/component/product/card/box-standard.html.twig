@@ -17,12 +17,4 @@
             <button class="variant-arrow right"><b>></b></button>
         </div>
     {% endif %}
-
-    <script>
-        document.querySelectorAll('.card-body .product-image-wrapper .product-image.is-standard').forEach(image => {
-            if (image.hasAttribute('alt')) {
-                image.setAttribute('title', image.getAttribute('alt'));
-            }
-        });
-    </script>
 {% endblock %}

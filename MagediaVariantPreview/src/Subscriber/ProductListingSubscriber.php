@@ -83,7 +83,7 @@ class ProductListingSubscriber implements EventSubscriberInterface
                                             UrlGeneratorInterface::ABSOLUTE_URL
                                         ),
                                         'image' => $imageUrl,
-                                        'title' => $image->getAlt() ?? $child->getTranslation('name'),
+                                        'title' => $child->getTranslation('name') . ' ' . $optionName,
                                     ];
 
                                     break;
