@@ -11,5 +11,10 @@
             <argument type="service" id="router" />
             <tag name="kernel.event_subscriber" />
         </service>
+
+        <service id="Magedia\VariantPreview\Command\ProductShortDescriptionImportCommand">
+            <argument type="service" id="product.repository"/>
+            <tag name="console.command"/>
+        </service>
     </services>
 </container>
