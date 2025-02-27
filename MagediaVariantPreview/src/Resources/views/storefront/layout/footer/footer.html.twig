@@ -5,25 +5,28 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            function updateImageTitles() {
-                document.querySelectorAll('.product-image').forEach(image => {
-                    const productBox = image.closest('.product-box');
-                    if (productBox) {
-                        const productName = productBox.querySelector('.product-name');
-                        if (productName) {
-                            image.title = productName.textContent.trim();
+            const productListWrapper = document.querySelector('.cms-element-product-listing-wrapper');
+            if (productListWrapper) {
+                function updateImageTitles() {
+                    document.querySelectorAll('.product-image').forEach(image => {
+                        const productBox = image.closest('.product-box');
+                        if (productBox) {
+                            const productName = productBox.querySelector('.product-name');
+                            if (productName) {
+                                image.title = productName.textContent.trim();
+                            }
                         }
-                    }
-                });
-            }
+                    });
+                }
 
-            updateImageTitles();
-
-            const observer = new MutationObserver(() => {
                 updateImageTitles();
-            });
 
-            observer.observe(document.querySelector('.cms-element-product-listing-wrapper'), {childList: true, subtree: true});
+                const observer = new MutationObserver(() => {
+                    updateImageTitles();
+                });
+
+                observer.observe(productListWrapper, {childList: true, subtree: true});
+            }
         });
     </script>
 {% endblock %}
