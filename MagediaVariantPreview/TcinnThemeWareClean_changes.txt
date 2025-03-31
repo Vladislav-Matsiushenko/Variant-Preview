@@ -1,0 +1,13 @@
+custom/plugins/TcinnThemeWareClean/src/Resources/views/storefront/component/product/description.html.twig
+...
+{% block component_product_description_content %}
+    {# Default block #}
+    {{ parent() }}
+
+    {# Magedia: short description #}
+    {% if twtCustomFields.product.twt_clean_pro_custom_field__product__short_description is not empty %}
+        <span class="twt-short-description">
+            {{ twtCustomFields.product.twt_clean_pro_custom_field__product__short_description|raw }}
+        </span>
+    {% endif %}
+...

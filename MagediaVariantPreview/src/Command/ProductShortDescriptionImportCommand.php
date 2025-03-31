@@ -46,8 +46,18 @@ class ProductShortDescriptionImportCommand extends Command
             $customFields = $product->getCustomFields() ?? [];
             $shortDescription = $customFields[self::OLD_SHORT_DESCRIPTION_TECHNICAL_NAME] ?? null;
 
+            $takenFromParent = false;
             if (!$shortDescription && $product->getParentId() && isset($parentData[$product->getParentId()])) {
                 $shortDescription = $parentData[$product->getParentId()];
+                $takenFromParent = true;
+            }
+
+            // Fix images
+            if ($shortDescription) {
+                $shortDescription = $this->fixShortDescriptionImage($shortDescription);
+                if (!$takenFromParent) {
+                    $customFields[self::OLD_SHORT_DESCRIPTION_TECHNICAL_NAME] = $shortDescription;
+                }
             }
 
             $customFields[self::NEW_SHORT_DESCRIPTION_TECHNICAL_NAME] = $shortDescription;
@@ -62,5 +72,24 @@ class ProductShortDescriptionImportCommand extends Command
         }
 
         return Command::SUCCESS;
+    }
+
+    private function fixShortDescriptionImage($description): string
+    {
+        if (str_contains($description, '<img')) {//91
+            if (str_contains($description, 'icons-seifen.jpg')) {//43
+                $description = '<p><img src="/media/g0/aa/58/1737361889/icons-seifen.jpg" alt="icons-seifen" /></p>';
+            } elseif (str_contains($description, 'icons-handcremeI5jws9I5KJWdC.jpg')) {//10
+                $description = '<p><img src="/media/e8/d8/80/1737361887/icons-handcremei5jws9i5kjwdc.jpg" alt="icons-handcremeI5jws9I5KJWdC" /></p>';
+            } elseif (str_contains($description, 'icons-handcreme-kew.jpg')) {//10
+                $description = '<p><img src="/media/e1/c4/a1/1737361900/icons-handcreme-kew.jpg" alt="icons-handcreme-kew" /></p>';
+            } elseif (str_contains($description, 'icons-seifen-kew.jpg')) {//15
+                $description = '<p><img src="/media/be/be/14/1737361908/icons-seifen-kew.jpg" alt="icons-seifen-kew" /></p>';
+            } elseif (str_contains($description, 'icons-gift-box-kew.jpg')) {//13
+                $description = '<p><img src="/media/e3/ec/9c/1737361902/icons-gift-box-kew.jpg" alt="icons-gift-box-kew" /></p>';
+            }
+        }
+
+        return $description;
     }
 }
