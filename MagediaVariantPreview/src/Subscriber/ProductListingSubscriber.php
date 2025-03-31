@@ -64,29 +64,31 @@ class ProductListingSubscriber implements EventSubscriberInterface
                 $optionNames = [];
                 $imageUrls = [];
                 foreach ($this->productRepository->search($criteria, $context)->getEntities() as $child) {
-                    foreach ($child->getOptions() as $option) {
-                        if (in_array($option->getGroup()?->getId(), $propertyGroupId)) {
+                    if ($child->getActive()) {
+                        foreach ($child->getOptions() as $option) {
+                            if (in_array($option->getGroup()?->getId(), $propertyGroupId)) {
 
-                            $optionName = $option->getTranslation('name');
-                            if (!in_array($optionName, $optionNames)) {
+                                $optionName = $option->getTranslation('name');
+                                if (!in_array($optionName, $optionNames)) {
 
-                                $image = $child->getMedia()?->first()?->getMedia();
-                                $imageUrl = $image?->getUrl();
-                                if ($imageUrl && !in_array($imageUrl, $imageUrls)) {
-                                    $optionNames[] = $optionName;
-                                    $imageUrls[] = $imageUrl;
+                                    $image = $child->getMedia()?->first()?->getMedia();
+                                    $imageUrl = $image?->getUrl();
+                                    if ($imageUrl && !in_array($imageUrl, $imageUrls)) {
+                                        $optionNames[] = $optionName;
+                                        $imageUrls[] = $imageUrl;
 
-                                    $variants[] = [
-                                        'url' => $this->router->generate(
-                                            'frontend.detail.page',
-                                            ['productId' => $child->getId()],
-                                            UrlGeneratorInterface::ABSOLUTE_URL
-                                        ),
-                                        'image' => $imageUrl,
-                                        'title' => $child->getTranslation('name') . ' ' . $optionName,
-                                    ];
+                                        $variants[] = [
+                                            'url' => $this->router->generate(
+                                                'frontend.detail.page',
+                                                ['productId' => $child->getId()],
+                                                UrlGeneratorInterface::ABSOLUTE_URL
+                                            ),
+                                            'image' => $imageUrl,
+                                            'title' => $child->getTranslation('name') . ' ' . $optionName,
+                                        ];
 
-                                    break;
+                                        break;
+                                    }
                                 }
                             }
                         }

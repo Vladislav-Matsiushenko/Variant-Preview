@@ -1,4 +1,5 @@
 .product-variants-container {
+  min-height: 5rem;
   position: relative;
 
   .product-variants {
@@ -62,4 +63,9 @@
     right: 0;
     border-radius: 3px 0 0 3px;
   }
+}
+
+.product-name {
+  font-size: 16px;
+  height: 44px;
 }
