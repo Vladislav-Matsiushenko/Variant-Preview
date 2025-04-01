@@ -7,7 +7,8 @@ export default class MagediaVariantPreview extends PluginBaseClass {
     }
 
     initImageUpdate() {
-        const mainImage = this.el.closest('.card-body')?.querySelector('.product-image-wrapper .product-image.is-standard'),
+        const ninjaCover = this.el.closest('.card-body')?.querySelector('.product-image-wrapper .ninja-hover-cover-none'),
+            mainImage = this.el.closest('.card-body')?.querySelector('.product-image-wrapper .product-image.is-standard'),
             thumbnails = this.el.querySelectorAll('.product-variants .variant-link');
 
         if (!mainImage || thumbnails.length === 0) {
@@ -22,14 +23,22 @@ export default class MagediaVariantPreview extends PluginBaseClass {
             thumbnail.addEventListener('mouseover', () => {
                 const newImage = thumbnail.getAttribute('data-image');
                 if (newImage) {
-                    mainImage.srcset = newImage;
+                    if (ninjaCover) {
+                        ninjaCover.style.setProperty('--ninja-cover', 'url(\'' + newImage + '\')');
+                    } else {
+                        mainImage.srcset = newImage;
+                    }
                 }
             });
 
             thumbnail.addEventListener('mouseout', () => {
                 const originalImage = mainImage.getAttribute('data-original');
                 if (originalImage) {
-                    mainImage.srcset = originalImage;
+                    if (ninjaCover) {
+                        ninjaCover.style.setProperty('--ninja-cover', 'url(\'' + originalImage + '\')');
+                    } else {
+                        mainImage.srcset = originalImage;
+                    }
                 }
             });
         });
