@@ -1,0 +1,19 @@
+custom/apps/NINJAHoverCover/Resources/app/storefront/src/scss/ninja-hover-cover/ninja-hover-cover.scss
+...
+/* No Effect */
+.product-image-link {
+    .ninja-hover-cover-none {
+        background-image: var(--ninja-cover);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+
+        /* Magedia: make hover image cover the entire product box */
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+}
+...
