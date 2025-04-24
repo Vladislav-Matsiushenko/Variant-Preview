@@ -1,0 +1,150 @@
+{% block block_image_text %}
+    {% set columns = 2 %}
+    <style>
+        .teaser--text-long {
+            position: relative;
+            padding: 0;
+        }
+        .teaser--text-long .blue_box_style {
+            margin-top: 0;
+            position: relative;
+            min-width: 550px;
+            padding: 10px;
+            min-height: 250px;
+            border-radius: 12px;
+        }
+        .teaser--text-long .section01 {
+            padding: 0;
+            min-height: 250px;
+        }
+        .teaser--text-long .section01 .section02 {
+            border: 2px solid #1d2151;
+            padding: 25px;
+            min-height: 250px;
+        }
+        .teaser--text-long .blue_box_style .section01 .section02 .inner_contnt_sec {
+            display: table-cell;
+            width: 100vw;
+            height: 192px;
+            vertical-align: middle;
+        }
+        .teaser--text-long .blue_box_style .section01 .section02 .inner_contnt_sec .corner01 {
+            position: absolute;
+            width: 42px;
+            left: 10px;
+            top: 10px;
+            background-color: #e7eef9;
+        }
+        .teaser--text-long .blue_box_style img {
+            display: block;
+            max-width: 100%;
+            max-height: 100%;
+            height: auto;
+        }
+        .teaser--text-long .blue_box_style .section01 .section02 .inner_contnt_sec .corner02 {
+            position: absolute;
+            width: 40px;
+            right: 10px;
+            top: 10px;
+            background-color: #e7eef9;
+        }
+        .teaser--text-long .blue_box_style .section01 .section02 .inner_contnt_sec .corner03 {
+            position: absolute;
+            width: 42px;
+            left: 10px;
+            bottom: 10px;
+            background-color: #e7eef9;
+        }
+        .teaser--text-long .blue_box_style .section01 .section02 .inner_contnt_sec .corner04 {
+            position: absolute;
+            width: 42px;
+            right: 10px;
+            bottom: 10px;
+            background-color: #e7eef9;
+        }
+        .teaser--text-long .blue_box_style .section01 .section02 .inner_contnt_sec .contnt_sec {
+            position: relative;
+        }
+        @media screen and (max-width: 767px) {
+            .blue_box_style {
+                width: 100% !important;
+                min-width: inherit !important;
+                z-index: 999;
+                min-height: auto;
+            }
+            .teaser--text-long {
+                display: block !important;
+                margin-bottom: 15px;
+            }
+            .blue_box_style .section01 .section02 {
+                min-height: auto;
+            }
+            .blue_box_style .section01 {
+                min-height: auto;
+            }
+            .teaser--text-long .section01 .section02{
+                padding: 10px;
+            }
+        }
+        /*#image-magedia .cms-element-image .cms-image-container.is-cover img {*/
+        /*    position: relative;*/
+        /*}*/
+        /*#image-magedia .cms-element-image .cms-image-container.is-cover {*/
+        /*    min-height: 100% !important;*/
+        /*}*/
+    </style>
+    <div class="teaser--text-long">
+        <div class="blue_box_style">
+            <div class="section01">
+                <div class="section02">
+                    <div class="inner_contnt_sec">
+                        <div class="corner01"><img src="{{ asset('assets/logo/2.png', 'theme') }}" alt=""></div>
+                        <div class="corner02"><img src="{{ asset('assets/logo/3.png', 'theme') }}" alt=""></div>
+                        <div class="corner03"><img src="{{ asset('assets/logo/1.png', 'theme') }}" alt=""></div>
+                        <div class="corner04"><img src="{{ asset('assets/logo/4.png', 'theme') }}" alt=""></div>
+                        <div class="row gap-3 gap-lg-0">
+                            <div id="image-magedia" class="col-md-6">
+                                {% block block_image_text_left %}
+                                    {% set element = block.slots.getSlot('left') %}
+                                    {% block block_image_text_left_inner %}
+                                        {% sw_include '@Storefront/storefront/element/cms-element-' ~ element.type ~ '.html.twig' ignore missing %}
+                                    {% endblock %}
+                                {% endblock %}
+                            </div>
+                            <div class="col-md-6">
+                                {% block block_image_text_right %}
+                                    {% set element = block.slots.getSlot('right') %}
+                                    {% block block_image_text_right_inner %}
+                                        {% sw_include '@Storefront/storefront/element/cms-element-' ~ element.type ~ '.html.twig' ignore missing %}
+                                    {% endblock %}
+                                {% endblock %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {#    <div class="frame-wrapper"> #}
+    {#        <div class="content-wrapper"> #}
+    {#            <div class="row align-items-center"> #}
+    {#                    <div class="col-md-6"> #}
+    {#                        {% block block_image_text_left %} #}
+    {#                            {% set element = block.slots.getSlot('left') %} #}
+    {#                            {% block block_image_text_left_inner %} #}
+    {#                                {% sw_include '@Storefront/storefront/element/cms-element-' ~ element.type ~ '.html.twig' ignore missing %} #}
+    {#                            {% endblock %} #}
+    {#                        {% endblock %} #}
+    {#                    </div> #}
+    {#                    <div class="col-md-6"> #}
+    {#                        {% block block_image_text_right %} #}
+    {#                            {% set element = block.slots.getSlot('right') %} #}
+    {#                            {% block block_image_text_right_inner %} #}
+    {#                                {% sw_include '@Storefront/storefront/element/cms-element-' ~ element.type ~ '.html.twig' ignore missing %} #}
+    {#                            {% endblock %} #}
+    {#                        {% endblock %} #}
+    {#                    </div> #}
+    {#            </div> #}
+    {#        </div> #}
+    {#    </div> #}
+{% endblock %}

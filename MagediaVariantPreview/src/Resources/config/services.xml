@@ -12,8 +12,10 @@
             <tag name="kernel.event_subscriber" />
         </service>
 
-        <service id="Magedia\VariantPreview\Command\ProductShortDescriptionImportCommand">
+        <service id="Magedia\VariantPreview\Command\ProductStorefrontImageImportCommand">
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
             <argument type="service" id="product.repository"/>
+            <argument type="service" id="product_configurator_setting.repository" />
             <tag name="console.command"/>
         </service>
     </services>

@@ -11,3 +11,23 @@ custom/plugins/TcinnThemeWareClean/src/Resources/views/storefront/component/prod
         </span>
     {% endif %}
 ...
+
+
+
+
+upload 4 png images to сustom/plugins/TcinnThemeWareClean/src/Resources/app/storefront/src/assets/logo/
+cp 1.png ../TcinnThemeWareClean/src/Resources/app/storefront/src/assets/logo/1.png
+cp 2.png ../TcinnThemeWareClean/src/Resources/app/storefront/src/assets/logo/2.png
+cp 3.png ../TcinnThemeWareClean/src/Resources/app/storefront/src/assets/logo/3.png
+cp 4.png ../TcinnThemeWareClean/src/Resources/app/storefront/src/assets/logo/4.png
+
+
+
+
+upload 2 files:
+custom/plugins/TcinnThemeWareClean/src/Resources/app/storefront/src/scss/layout/_container.scss
+custom/plugins/TcinnThemeWareClean/src/Resources/views/storefront/block/cms-block-image-text.html.twig
+
+mv ../TcinnThemeWareClean/src/Resources/app/storefront/src/scss/layout/_container.scss ../TcinnThemeWareClean/src/Resources/app/storefront/src/scss/layout/_container.scss_old
+cp _container.scss ../TcinnThemeWareClean/src/Resources/app/storefront/src/scss/layout/_container.scss
+cp cms-block-image-text.html.twig ../TcinnThemeWareClean/src/Resources/views/storefront/block/cms-block-image-text.html.twig

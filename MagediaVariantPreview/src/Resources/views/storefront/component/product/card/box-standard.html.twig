@@ -8,7 +8,7 @@
             <div class="product-variants">
                 {% for variant in product.extensions.variantThumbnails %}
                     <a href="{{ variant.url }}" class="variant-link" title="{{ variant.title }}" data-image="{{ variant.image }}">
-                        <img src="{{ variant.image }}" alt="Variant Thumbnail" class="variant-thumbnail"/>
+                        <img src="{{ variant.image }}" class="variant-thumbnail"/>
                     </a>
                 {% endfor %}
             </div>

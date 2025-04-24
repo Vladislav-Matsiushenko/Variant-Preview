@@ -1,0 +1,87 @@
+/*
+    _____ _                __      __
+   |_   _| |_  ___ _ __  __\ \    / /_ _ _ _ ___  (R)
+     | | | ' \/ -_) '  \/ -_) \/\/ / _` | '_/ -_)
+     |_| |_||_\___|_|_|_\___|\_/\_/\__,_|_| \___|
+
+    Copyright (c) TC-Innovations GmbH
+
+	ThemeWare: Container
+	==============================================
+	Additional styling for bootstrap container layout.
+	https://getbootstrap.com/docs/5.2/layout/containers
+
+	Origin: Shopware base
+*/
+
+/* ThemeWare: Container adjustment */
+
+// ThemeWare: Adjust max-width if configuration differing from Shopware max-width
+@if $twt-container-max-width != 1400 {
+  .container,
+  .cms-section .boxed {
+    max-width: null-pixel-unit($twt-container-max-width);
+  }
+}
+
+.container-main {
+  min-height: $twt-container-main-min-height-mobile;
+  padding: 0;
+
+  @include media-breakpoint-up(xl) { // min 1200px
+    min-height: $twt-container-main-min-height-desktop;
+  }
+
+  & > div:not(.container) {
+    border-radius: null-pixel-unit($twt-border-radius);
+  }
+}
+
+// ThemeWare: Mobile container padding -> Non-CMS-Pages
+// @TODO: Add solution for different page types and/or viewports
+@include media-breakpoint-down(sm) { // max 575.98px
+  .content-main > .container {
+    // Note: Targets .container around .container-main
+    --bs-gutter-x: #{null-pixel-unit($twt-container-padding-left-right * 2)};
+  }
+}
+
+
+/* ThemeWare: Hide Shopware cloud promotion bar */
+.container-main + .promotion-bar-container,
+.content-main + .promotion-bar-container {
+  display: none !important;
+}
+
+.twt-is-cms-product-detail{
+  .cms-section-default{
+    .cms-block-product-heading{
+      background-color: #fff !important;
+      border-bottom-left-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+    }
+
+    .cms-block-gallery-buybox{
+      background-color: #fff !important;
+      border-top-right-radius: 0 !important;
+      border-top-left-radius: 0 !important;
+    }
+
+    .cms-block-product-description-reviews{
+      background-color: #fff !important;
+      .cms-block-container{
+        background-color: #fff !important;
+
+        .product-detail-tabs-content{
+          background-color: #fff !important;
+        }
+      }
+    }
+
+    .product-detail-cross-selling{
+      .product-detail-tabs-content{
+        background-color: #fff !important;
+      }
+    }
+  }
+}
