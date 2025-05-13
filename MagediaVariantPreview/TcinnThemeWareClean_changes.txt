@@ -14,6 +14,26 @@ custom/plugins/TcinnThemeWareClean/src/Resources/views/storefront/component/prod
 
 
 
+custom/plugins/TcinnThemeWareClean/src/Resources/views/storefront/layout/breadcrumb.html.twig
+...
+{# Default #}
+{% for breadcrumbCategory in breadcrumbCategories %}
+    {% set key = breadcrumbCategory.id %}
+    {% set name = breadcrumbCategory.translated.name %}
+
+    {{ block('layout_breadcrumb_list_item') }}
+
+    {{ block('layout_breadcrumb_placeholder') }}
+
+    {% if loop.last %}
+        {% set name = 'Übersicht' %}
+        <div class="last-breadcrumb-item-magedia d-none">
+            {{ block('layout_breadcrumb_list_item') }}
+        </div>
+    {% endif %}
+{% endfor %}
+...
+
 
 upload 4 png images to сustom/plugins/TcinnThemeWareClean/src/Resources/app/storefront/src/assets/logo/
 cp 1.png ../TcinnThemeWareClean/src/Resources/app/storefront/src/assets/logo/1.png

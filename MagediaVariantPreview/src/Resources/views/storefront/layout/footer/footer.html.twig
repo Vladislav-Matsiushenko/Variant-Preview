@@ -33,6 +33,17 @@
 
                 observer.observe(productListWrapper, {childList: true, subtree: true});
             }
+
+            const lastItem = document.querySelector('.last-breadcrumb-item-magedia');
+            const breadcrumbList = document.querySelector('.breadcrumb');
+            if (lastItem && breadcrumbList) {
+                if (document.querySelector('.product-detail-tabs')) {
+                    breadcrumbList.prepend(lastItem);
+                    lastItem.classList.remove('d-none');
+                } else {
+                    lastItem.remove();
+                }
+            }
         });
     </script>
 {% endblock %}

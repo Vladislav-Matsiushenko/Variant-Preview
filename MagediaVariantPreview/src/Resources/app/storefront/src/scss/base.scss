@@ -73,3 +73,17 @@
 .product-description {
   display: none;
 }
+
+.last-breadcrumb-item-magedia {
+  position: absolute;
+  left: 5rem;
+}
+
+@media (max-width: 768px) {
+  .last-breadcrumb-item-magedia {
+    position: static;
+    margin-bottom: 0.5rem;
+    display: block;
+    width: 100%;
+  }
+}
