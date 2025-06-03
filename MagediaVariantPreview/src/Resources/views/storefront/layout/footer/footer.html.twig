@@ -40,6 +40,12 @@
                 if (document.querySelector('.product-detail-tabs')) {
                     breadcrumbList.prepend(lastItem);
                     lastItem.classList.remove('d-none');
+
+                    const link = lastItem.querySelector('a.breadcrumb-link');
+                    const refererParams = lastItem.dataset.refererParams || '';
+                    if (link && refererParams) {
+                        link.href += '?' + refererParams;
+                    }
                 } else {
                     lastItem.remove();
                 }

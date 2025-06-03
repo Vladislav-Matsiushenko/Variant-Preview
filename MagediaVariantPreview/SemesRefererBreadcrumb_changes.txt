@@ -1,0 +1,11 @@
+custom/plugins/SemesRefererBreadcrumb/src/Subscriber/FrontendSubscriber.php
+...
+$url = $_SERVER['HTTP_REFERER'] ?? '';
+$url = stripos($url, $currentDomain) === 0 ? (str_replace($currentDomain, '', $url)) : $url;
+$url = explode('?', $url, 2);
+
+$this->getCurrentSession()->set('refererParams', $url[1]);
+
+$url = $url[0];
+$url = trim(strtolower($url), '/');
+...

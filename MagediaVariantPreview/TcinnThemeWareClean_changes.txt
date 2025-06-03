@@ -27,12 +27,45 @@ custom/plugins/TcinnThemeWareClean/src/Resources/views/storefront/layout/breadcr
 
     {% if loop.last %}
         {% set name = 'Übersicht' %}
-        <div class="last-breadcrumb-item-magedia d-none">
+        <div class="last-breadcrumb-item-magedia d-none" data-referer-params="{{ app.session.get('refererParams') }}">
             {{ block('layout_breadcrumb_list_item') }}
         </div>
     {% endif %}
 {% endfor %}
 ...
+
+
+
+custom/plugins/TcinnThemeWareClean/src/Resources/app/storefront/src/scss/component/_breadcrumb.scss
+...
+.breadcrumb-item {
+    display: flex; // Firefox-Fix
+
+    // Link
+    a {
+        transition: opacity .25s ease-in-out;
+        color: $twt-breadcrumb-link-color;
+//        @include twt-font-size-rem($font-size-md); // 0.875rem
+
+        &:hover {
+            opacity: 0.7;
+            color: $twt-breadcrumb-link-color;
+        }
+    }
+...
+
+
+custom/plugins/TcinnThemeWareClean/src/Resources/app/storefront/src/scss/layout/_container.scss
+...
+@if $twt-container-max-width != 1400 {
+    .container,
+    .cms-section .boxed,
+    .cms-breadcrumb.container {
+        max-width: null-pixel-unit($twt-container-max-width);
+    }
+}
+...
+
 
 
 upload 4 png images to сustom/plugins/TcinnThemeWareClean/src/Resources/app/storefront/src/assets/logo/
